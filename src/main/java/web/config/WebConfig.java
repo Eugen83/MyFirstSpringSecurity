@@ -12,8 +12,8 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
-@ComponentScan("web")
 @EnableWebMvc
+@ComponentScan("web")
 public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
@@ -27,7 +27,8 @@ public class WebConfig implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/pages/users/");
+        templateResolver.setPrefix("/WEB-INF/pages/");
+        templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setSuffix(".html");
         return templateResolver;
     }

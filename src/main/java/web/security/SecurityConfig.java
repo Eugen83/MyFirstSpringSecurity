@@ -13,13 +13,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
-@Configuration
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
+    public SecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+
+    }
 
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -48,7 +51,7 @@ private UserDetailsService userDetailsService;
                 .permitAll()
                 // указываем URL логаута
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                // указываем URL при удачном логауте
+                // указываем URL при удачном лог ауте
                 .logoutSuccessUrl("/login?logout")
                 //выключаем кроссдоменную секьюрность (на этапе обучения неважно)
                 .and().csrf().disable();
@@ -56,7 +59,7 @@ private UserDetailsService userDetailsService;
         http
                 // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
-                //страницы аутентификаци доступна всем
+                //страницы аутентификации доступна всем
                 .antMatchers("/login","/hello").anonymous()
                 // защищенные URL
                 .antMatchers("/admin/**").access("hasAuthority('ADMIN')")
