@@ -9,7 +9,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 @Component
-@Transactional
+//@Transactional
 public class RoleDAOImpl implements RoleDAO{
     @PersistenceContext
     private EntityManager entityManager;

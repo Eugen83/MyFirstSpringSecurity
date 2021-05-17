@@ -19,14 +19,13 @@ import java.util.Set;
 public class AdminController {
     private final UserService userService;
     private final RoleDAO roleDAO;
+    private  final PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    PasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    public AdminController(UserService userService, RoleDAO roleDAO) {
+    public AdminController(UserService userService, RoleDAO roleDAO, PasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
         this.roleDAO = roleDAO;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @GetMapping("/admin")

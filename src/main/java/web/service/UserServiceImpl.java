@@ -10,25 +10,36 @@ import web.dao.RoleDAO;
 import web.dao.UserDAO;
 import web.model.User;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
-    private UserDAO userDAO;
-    private RoleDAO roleDAO;
+    private final UserDAO userDAO;
+    private final RoleDAO roleDAO;
 
-    @Autowired
-    PasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    public void setUserDAO(UserDAO userDAO) {
+//    public UserServiceImpl(PasswordEncoder bCryptPasswordEncoder) {
+//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+//    }
+
+    public UserServiceImpl(UserDAO userDAO, RoleDAO roleDAO, PasswordEncoder bCryptPasswordEncoder) {
         this.userDAO = userDAO;
-    }
-
-    @Autowired
-    public void setRoleDAO(RoleDAO roleDAO) {
         this.roleDAO = roleDAO;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
+//
+//    @Autowired
+//    public void setUserDAO(UserDAO userDAO) {
+//        this.userDAO = userDAO;
+//    }
+//
+//    @Autowired
+//    public void setRoleDAO(RoleDAO roleDAO) {
+//        this.roleDAO = roleDAO;
+//    }
 
     @Override
     public List<User> userList() {
