@@ -17,9 +17,11 @@ import java.util.Set;
 @Controller
 @RequestMapping("/")
 public class AdminController {
+
     private final UserService userService;
     private final RoleDAO roleDAO;
-    private  final PasswordEncoder bCryptPasswordEncoder;
+
+    private final PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public AdminController(UserService userService, RoleDAO roleDAO, PasswordEncoder bCryptPasswordEncoder) {

@@ -9,7 +9,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 @Component
-//@Transactional
+@Transactional
 public class RoleDAOImpl implements RoleDAO{
     @PersistenceContext
     private EntityManager entityManager;
@@ -18,6 +18,7 @@ public class RoleDAOImpl implements RoleDAO{
     }
 
     @Override
+
     public void save(Role role) {
         Role managed = entityManager.merge(role);
         entityManager.persist(managed);
@@ -25,6 +26,7 @@ public class RoleDAOImpl implements RoleDAO{
 
 
     @Override
+
     public void delete(Role role) {
         Role managed = entityManager.merge(role);
         entityManager.remove(managed);
@@ -36,6 +38,7 @@ public class RoleDAOImpl implements RoleDAO{
     }
 
     @Override
+
     public Role getRoleByName(String rolename) {
         try{
             Role role = entityManager.createQuery("SELECT r FROM Role r where r.name = :name", Role.class)

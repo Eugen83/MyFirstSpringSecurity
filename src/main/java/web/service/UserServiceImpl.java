@@ -1,7 +1,6 @@
 package web.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,30 +15,16 @@ import java.util.List;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
-    private final UserDAO userDAO;
-    private final RoleDAO roleDAO;
+    private  final UserDAO userDAO;
+    private  final RoleDAO roleDAO;
 
     private final PasswordEncoder bCryptPasswordEncoder;
+        public UserServiceImpl( PasswordEncoder bCryptPasswordEncoder, UserDAO userDAO, RoleDAO roleDAO) {
+            this.userDAO = userDAO;
+            this.roleDAO = roleDAO;
+            this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        }
 
-//    public UserServiceImpl(PasswordEncoder bCryptPasswordEncoder) {
-//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-//    }
-
-    public UserServiceImpl(UserDAO userDAO, RoleDAO roleDAO, PasswordEncoder bCryptPasswordEncoder) {
-        this.userDAO = userDAO;
-        this.roleDAO = roleDAO;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
-//
-//    @Autowired
-//    public void setUserDAO(UserDAO userDAO) {
-//        this.userDAO = userDAO;
-//    }
-//
-//    @Autowired
-//    public void setRoleDAO(RoleDAO roleDAO) {
-//        this.roleDAO = roleDAO;
-//    }
 
     @Override
     public List<User> userList() {
